@@ -12,14 +12,13 @@ public class BinarySolution extends IProblemSolution {
 
 	@Override
 	public long solve(int[] ranks, int cars) {
-
+		
 		log(ranks.length, "mechanics repair", cars, "cars");
 		
 		// Can't make it slower, then the worst of them alone
 		int worstRank = Tools.findMax(ranks);
 		long maxTime = IProblemSolution.getTimeTaken(worstRank, cars);
-		long minRepaired = Tools.findMin(ranks);
-		System.out.println(minRepaired);
+		
 		// Default to 0, being very optimistic (actually, they will truly
 		// repair 0 cars in 0 minutes)
 		long minTime = 0;
@@ -27,9 +26,15 @@ public class BinarySolution extends IProblemSolution {
 		// Start from middle
 		long time = (long) Tools.getMiddle(minTime, maxTime);
 		
-		long lastRepaired = 0;
+		long repaired = 0;
 		
-		while (lastRepaired < cars || Math.abs(lastRepaired - cars) > minRepaired && (maxTime - minTime) > 1) {
+		/* 
+		 * Do while:
+		 * - Haven't repaired the enough amount of cars OR
+		 * - There is still a pretty large gap between minimal and maximal possible time taken
+		*/
+		log("Starting boundaries:", minTime, ",", maxTime);
+		while (repaired < cars || (maxTime - minTime) > 1) {
 			if (isLogging) {
 				try {
 					Thread.sleep(500);
@@ -39,15 +44,8 @@ public class BinarySolution extends IProblemSolution {
 				}
 			}
 			
-			log("Current boundaries:", minTime, ",", maxTime);
-			
 			// Cars repaired by this time
-			long repaired = Tools.countParallel(ranks, time);
-			lastRepaired = repaired;
-			
-			/*if (repaired < cars && lastRepaired >= cars) {
-				return maxTime;
-			}*/
+			repaired = Tools.countParallel(ranks, time);
 			
 			log("Repaired", repaired, "cars withing", time, "minutes");
 			
@@ -56,23 +54,14 @@ public class BinarySolution extends IProblemSolution {
 				log(">>> Repaired more than needed");
 				maxTime = time; // The result surely equals or is less than that
 				
-				time = (long) Tools.getMiddle(minTime, time); // Maybe it's less...
-				/*if (time <= minTime) { 	// Repaired "enough" cars, and the next iteration
-					log(time, "is less than or equals", minTime);
-					break;				// will give us "not enough" cars (because
-				}*/						// we know, that "minTime = time"
-				continue;				// happens only when "repaired < cars"
-			}
-			if (repaired < cars) { // Not enough cars
+				time = (long) Tools.getMiddle(minTime, time);
+			} else { // Not enough cars
 				log(">>> Repaired not enough");
 				minTime = time; // This time is surely not enough, make it the lowest limit
 				
 				time = (long) Tools.getMiddle(minTime, maxTime);
-				/*if (time <= minTime) {
-					log(time, "is less than or equals", minTime);
-					break;
-				}*/
 			}
+			log("New boundaries:", minTime, ",", maxTime);
 		}
 		
 		log(maxTime, "minutes is enough");

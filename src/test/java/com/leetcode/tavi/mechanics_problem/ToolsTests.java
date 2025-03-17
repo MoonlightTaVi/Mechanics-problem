@@ -41,7 +41,7 @@ public class ToolsTests {
 		int[] ranks = new int[] {4,2,3,1};
 		long minutes = 16;
 		int surelyValid = Tools.countBasic(ranks, minutes);
-		long questionable = Tools.countParallel(ranks, minutes);
+		long questionable = Tools.countParallelAbs(ranks, minutes);
 		Assertions.assertEquals(surelyValid, questionable);
 	}
 	
