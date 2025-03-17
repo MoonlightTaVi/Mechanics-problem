@@ -1,10 +1,22 @@
 package com.leetcode.tavi.mechanics_problem;
 
-//import java.util.Random;
+import com.leetcode.tavi.mechanics_problem.solutions.BinarySolution;
+import com.leetcode.tavi.mechanics_problem.solutions.FinalSolution;
+import com.leetcode.tavi.mechanics_problem.solutions.AbstractProblemSolution;
+import com.leetcode.tavi.mechanics_problem.solutions.SimpleSolution;
 
+/**
+ * Here are the tests for Simple (brute-force, absolutely valid), Binary (much faster, but can fail
+ * if not set up properly) and Final (the same as Binary, but inside one single method and
+ * without commentaries) Solutions of the problem. You can toggle logging for
+ * Simple and Binary solutions by passing `true` to their constructors; though keep in mind,
+ * that Binary will pause the Thread every 500ms in that case, so that one can patiently
+ * read (and understand) the output during runtime and see, where it's failed (if it has)
+ */
 public class SolutionMain {
 	
-	public static long timestamp = 0;
+	/** Used to count the time passed between {@link #SolutionMain.timestamp()} calls */
+	private static long timestamp = 0;
 	
 	public static void main(String[] args) {
 		// This (random) test case was one of the failed
@@ -15,8 +27,8 @@ public class SolutionMain {
 		
 		System.out.println("=== SIMPLE SOLUTION ===");
 		
-		IProblemSolution simple = new SimpleSolution();
-		long a = simple.solve(ranks, cars);
+		AbstractProblemSolution simple = new SimpleSolution();
+		long a = simple.solve(ranks, cars); // ~30 seconds
 		
 		System.out.println("\n=== FINISHED ===\n");
 		
@@ -24,7 +36,7 @@ public class SolutionMain {
 		
 		System.out.println("=== BINARY SOLUTION ===");
 		
-		IProblemSolution binary = new BinarySolution();
+		AbstractProblemSolution binary = new BinarySolution(); // ~50 milliseconds
 		long b = binary.solve(ranks, cars);
 		
 		System.out.println("\n=== FINISHED ===\n");
@@ -34,12 +46,13 @@ public class SolutionMain {
 		System.out.println("\n=== SUBMITTED SOLUTION ===\n");
 		
 		FinalSolution finalSolution = new FinalSolution();
-		long c = finalSolution.repairCars(ranks, cars);
+		long c = finalSolution.repairCars(ranks, cars); // // ~20 milliseconds, because one single method
 		
 		System.out.println("\n=== FINISHED ===\n");
 		
 		timestamp();
 		
+		// Check if the results are the same (a is absolutely valid)
 		System.out.print("Result: ");
 		System.out.print(a);
 		System.out.print(" == ");
@@ -52,6 +65,10 @@ public class SolutionMain {
 		
 	}
 	
+	/**
+	 * Prints time passed since the last call into the console (possibly in red characters,
+	 * because {@link System.err} is used)
+	 */
 	public static void timestamp() {
 		
 		if (timestamp == 0) {

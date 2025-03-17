@@ -1,11 +1,29 @@
-package com.leetcode.tavi.mechanics_problem;
+package com.leetcode.tavi.mechanics_problem.solutions;
 
-public class SimpleSolution extends IProblemSolution {
+import com.leetcode.tavi.mechanics_problem.Tools;
 
+/**
+ * Utilizes a straight-forward, brute-force solution of the problem.
+ * It always returns a valid result (so it can be used to assert the results of other
+ * solutions), but it is very slow (about 3000 times slower than binary)
+ * @see AbstractProblemSolution
+ * @see BinarySolution
+ */
+public class SimpleSolution extends AbstractProblemSolution {
+
+	/**
+	 * Default constructor; logging is disabled
+	 */
 	public SimpleSolution() {
 		
 	}
 	
+	/**
+	 * Initializes a SimpleSolution instance with possibility to
+	 * turn on the logging into the console
+	 * @param isLogging - Whether log into console or not
+	 * (it is actually simpler than usual `Debug run` in this case)
+	 */
 	public SimpleSolution(boolean isLogging) {
 		this.isLogging = isLogging;
 	}

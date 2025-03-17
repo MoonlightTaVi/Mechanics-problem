@@ -1,11 +1,30 @@
-package com.leetcode.tavi.mechanics_problem;
+package com.leetcode.tavi.mechanics_problem.solutions;
 
-public class BinarySolution extends IProblemSolution {
+import com.leetcode.tavi.mechanics_problem.Tools;
+
+/**
+ * Utilizes a binary search to solve the problem.
+ * For now it's thoroughly tested and returns valid results, but at the beginning
+ * it was giving some absurd output, so it was tested by the SimpleSolution's
+ * results every time;
+ * @see AbstractProblemSolution
+ * @see SimpleSolution
+ */
+public class BinarySolution extends AbstractProblemSolution {
 	
+	/**
+	 * Default constructor; logging is disabled
+	 */
 	public BinarySolution() {
 		
 	}
 	
+	/**
+	 * Initializes a BinarySolution instance with possibility to
+	 * turn on the logging into the console
+	 * @param isLogging - Whether log into console or not
+	 * (it is actually simpler than usual `Debug run` in this case)
+	 */
 	public BinarySolution(boolean isLogging) {
 		this.isLogging = isLogging;
 	}
@@ -17,7 +36,7 @@ public class BinarySolution extends IProblemSolution {
 		
 		// Can't make it slower, then the worst of them alone
 		int worstRank = Tools.findMax(ranks);
-		long maxTime = IProblemSolution.getTimeTaken(worstRank, cars);
+		long maxTime = AbstractProblemSolution.getTimeTaken(worstRank, cars);
 		
 		// Default to 0, being very optimistic (actually, they will truly
 		// repair 0 cars in 0 minutes)

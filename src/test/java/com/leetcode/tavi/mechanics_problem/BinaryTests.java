@@ -7,6 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import com.leetcode.tavi.mechanics_problem.solutions.BinarySolution;
+import com.leetcode.tavi.mechanics_problem.solutions.AbstractProblemSolution;
+import com.leetcode.tavi.mechanics_problem.solutions.SimpleSolution;
+
 public class BinaryTests {
 
 	@Test
@@ -53,8 +57,8 @@ public class BinaryTests {
 	@Test
 	@DisplayName("BinarySolution doesn't get stuck for 10 times in a row")
 	public void timeoutTest() {
-		IProblemSolution simple = new SimpleSolution();
-		IProblemSolution binary = new BinarySolution();
+		AbstractProblemSolution simple = new SimpleSolution();
+		AbstractProblemSolution binary = new BinarySolution();
 		
 		boolean simpleRunning = true;
 		boolean binaryRunning = false;

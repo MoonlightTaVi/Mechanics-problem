@@ -1,7 +1,14 @@
-package com.leetcode.tavi.mechanics_problem;
+package com.leetcode.tavi.mechanics_problem.solutions;
 
 import java.util.Arrays;
 
+/**
+ * This is the solution, passed to LeetCode. It has only one method and is
+ * not commented/documented, because it basically accumulates all methods from
+ * the other classes.
+ * @see BinarySolution
+ * @see Tools
+ */
 public class FinalSolution {
     public long repairCars(int[] ranks, int cars) {
     	int worstRank = Arrays.stream(ranks).max().getAsInt();
